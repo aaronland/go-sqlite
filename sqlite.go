@@ -1,6 +1,7 @@
 package sqlite
 
 import (
+	"context"
 	"database/sql"
 	"os"
 	"regexp"
@@ -25,8 +26,8 @@ type Database interface {
 type Table interface {
 	Name() string
 	Schema() string
-	InitializeTable(Database) error
-	IndexRecord(Database, interface{}) error
+	InitializeTable(context.Context, Database) error
+	IndexRecord(context.Context, Database, interface{}) error
 }
 
 // this is here so we can pass both sql.Row and sql.Rows to the
@@ -42,7 +43,7 @@ type ResultRow interface {
 
 type ResultSetFunc func(row ResultSet) (ResultRow, error)
 
-func HasTable(db Database, table string) (bool, error) {
+func HasTable(ctx context.Context, db Database, table string) (bool, error) {
 
 	// you might be thinking it would be a good idea to cache this lookup
 	// I know I did... and I was wrong (20180713/thisisaaronland)
@@ -111,11 +112,11 @@ func HasTable(db Database, table string) (bool, error) {
 	return has_table, nil
 }
 
-func CreateTableIfNecessary(db Database, t Table) error {
+func CreateTableIfNecessary(ctx context.Context, db Database, t Table) error {
 
 	create := false
 
-	has_table, err := HasTable(db, t.Name())
+	has_table, err := HasTable(ctx, db, t.Name())
 
 	if err != nil {
 		return err

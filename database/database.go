@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
@@ -15,11 +16,11 @@ type SQLiteDatabase struct {
 	mu   *sync.Mutex
 }
 
-func NewDB(dsn string) (*SQLiteDatabase, error) {
-	return NewDBWithDriver("sqlite3", dsn)
+func NewDB(ctx context.Context, dsn string) (*SQLiteDatabase, error) {
+	return NewDBWithDriver(ctx, "sqlite3", dsn)
 }
 
-func NewDBWithDriver(driver string, dsn string) (*SQLiteDatabase, error) {
+func NewDBWithDriver(ctx context.Context, driver string, dsn string) (*SQLiteDatabase, error) {
 
 	if !strings.HasPrefix(dsn, "file:") {
 

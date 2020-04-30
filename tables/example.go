@@ -1,6 +1,7 @@
 package tables
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/aaronland/go-sqlite"
@@ -11,15 +12,15 @@ type ExampleTable struct {
 	name string
 }
 
-func NewExampleTableWithDatabase(db sqlite.Database) (sqlite.Table, error) {
+func NewExampleTableWithDatabase(ctx context.Context, db sqlite.Database) (sqlite.Table, error) {
 
-	t, err := NewExampleTable()
+	t, err := NewExampleTable(ctx)
 
 	if err != nil {
 		return nil, err
 	}
 
-	err = t.InitializeTable(db)
+	err = t.InitializeTable(ctx, db)
 
 	if err != nil {
 		return nil, err
@@ -28,7 +29,7 @@ func NewExampleTableWithDatabase(db sqlite.Database) (sqlite.Table, error) {
 	return t, nil
 }
 
-func NewExampleTable() (sqlite.Table, error) {
+func NewExampleTable(ctx context.Context) (sqlite.Table, error) {
 
 	t := ExampleTable{
 		name: "example",
@@ -51,12 +52,12 @@ func (t *ExampleTable) Schema() string {
 	return fmt.Sprintf(sql, t.Name())
 }
 
-func (t *ExampleTable) InitializeTable(db sqlite.Database) error {
+func (t *ExampleTable) InitializeTable(ctx context.Context, db sqlite.Database) error {
 
-	return sqlite.CreateTableIfNecessary(db, t)
+	return sqlite.CreateTableIfNecessary(ctx, db, t)
 }
 
-func (t *ExampleTable) IndexRecord(db sqlite.Database, i interface{}) error {
+func (t *ExampleTable) IndexRecord(ctx context.Context, db sqlite.Database, i interface{}) error {
 
 	conn, err := db.Conn()
 
