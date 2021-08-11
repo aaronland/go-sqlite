@@ -8,6 +8,8 @@ import (
 	_ "log"
 	"strings"
 	"sync"
+	"github.com/psanford/sqlite3vfshttp"
+	"github.com/psanford/sqlite3vfs"
 )
 
 type SQLiteDatabase struct {
@@ -33,6 +35,21 @@ func NewDBWithDriver(ctx context.Context, driver string, dsn string) (*SQLiteDat
 
 			dsn = "file::memory:?mode=memory&cache=shared"
 
+		} else if strings.HasPrefix(dsn, "http") {
+
+			vfs := sqlite3vfshttp.HttpVFS{
+				URL: dsn,
+				// RoundTripper: &roundTripper{}
+			}
+
+			err := sqlite3vfs.RegisterVFS("httpvfs", &vfs)
+			
+			if err != nil {
+				return nil, err
+			}
+
+			dsn = "not_a_real_name.db?vfs=httpvfs&mode=ro"
+			
 		} else {
 
 			// https://github.com/mattn/go-sqlite3/issues/39
