@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/psanford/sqlite3vfs"
+	"github.com/psanford/sqlite3vfshttp"
 	_ "log"
 	"strings"
 	"sync"
@@ -32,6 +34,24 @@ func NewDBWithDriver(ctx context.Context, driver string, dsn string) (*SQLiteDat
 			// https://github.com/mattn/go-sqlite3/issues/204
 
 			dsn = "file::memory:?mode=memory&cache=shared"
+
+		} else if strings.HasPrefix(dsn, "http") {
+
+			vfs := sqlite3vfshttp.HttpVFS{
+				URL: dsn,
+				// RoundTripper: &roundTripper{}
+			}
+
+			err := sqlite3vfs.RegisterVFS("httpvfs", &vfs)
+
+			if err != nil {
+				return nil, err
+			}
+
+			// See the vfs: prefix? We check that in sqlite.go to determine
+			// whether or not to os.Stat the database
+
+			dsn = "vfs:stub.db?vfs=httpvfs&mode=ro"
 
 		} else {
 
