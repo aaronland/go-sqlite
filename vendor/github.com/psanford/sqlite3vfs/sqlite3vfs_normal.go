@@ -1,6 +1,7 @@
 package sqlite3vfs
 
 /*
-   #cgo LDFLAGS: -lsqlite3
+   #cgo linux LDFLAGS: -Wl,--unresolved-symbols=ignore-in-object-files
+   #cgo darwin LDFLAGS: -Wl,-undefined,dynamic_lookup
 */
 import "C"
