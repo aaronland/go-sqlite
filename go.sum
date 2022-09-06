@@ -1,10 +1,2 @@
-github.com/google/go-cmp v0.5.6 h1:BKbKCqvP6I+rmFHt06ZmyQtvB8xAkWdhFyr0ZUNZcxQ=
-github.com/google/go-cmp v0.5.6/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
-github.com/mattn/go-sqlite3 v1.14.8/go.mod h1:NyWgC/yNuGj7Q9rpYnZvas74GogHl5/Z4A/KQRfk6bU=
 github.com/mattn/go-sqlite3 v1.14.15 h1:vfoHhTN1af61xCRSWzFIWzx2YskyMTwHLrExkBOjvxI=
 github.com/mattn/go-sqlite3 v1.14.15/go.mod h1:2eHXhiwb8IkHr+BDWZGa96P6+rkvnG63S2DGjv9HUNg=
-github.com/psanford/sqlite3vfs v0.0.0-20220823065410-bd28ac7ee3c2 h1:S7ikYUpctxijGIl4P+NJhGSMNov4bP9KsO3JWq/+gOs=
-github.com/psanford/sqlite3vfs v0.0.0-20220823065410-bd28ac7ee3c2/go.mod h1:iW4cSew5PAb1sMZiTEkVJAIBNrepaB6jTYjeP47WtI0=
-github.com/psanford/sqlite3vfshttp v0.0.0-20220827153928-a19f096e6eb4 h1:ea/vBgpSGRKEdguoxGNiGz8byJNyVXPNVg8pPFsVbWc=
-github.com/psanford/sqlite3vfshttp v0.0.0-20220827153928-a19f096e6eb4/go.mod h1:5s4abpgrv1UTVgYqZOyd+7lLiFtOIytXnuhZI0m4NWo=
-golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
