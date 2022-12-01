@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/aaronland/go-sqlite"
+	"github.com/aaronland/go-sqlite/v2"
 )
 
 type ExampleTable struct {

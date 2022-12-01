@@ -1,7 +1,12 @@
 # go-sqlite
 
-Go package for working with mattn/go-sqlite3 databases.
+Go package for working with SQLite databases.
+
+## Documentation
+
+Documentation is incomplete at this time.
 
 ## See also
 
-* https://github.com/mattn/go-sqlite3
+* https://github.com/aaronland/go-sqlite-modernc
+* https://github.com/aaronland/go-sqlite-mattn

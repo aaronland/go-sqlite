@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/aaronland/go-sqlite"
-	"github.com/aaronland/go-sqlite/query"
+	"github.com/aaronland/go-sqlite/v2"
+	"github.com/aaronland/go-sqlite/v2/query"
 	"log"
 	"os"
 )
