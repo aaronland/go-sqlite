@@ -59,7 +59,7 @@ func (t *ExampleTable) InitializeTable(ctx context.Context, db sqlite.Database) 
 
 func (t *ExampleTable) IndexRecord(ctx context.Context, db sqlite.Database, i interface{}) error {
 
-	conn, err := db.Conn()
+	conn, err := db.Conn(ctx)
 
 	if err != nil {
 		return err

@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/aaronland/go-sqlite/database"
+	"github.com/aaronland/go-sqlite"
 	"github.com/aaronland/go-sqlite/query"
 	"log"
 	"os"
@@ -11,20 +11,20 @@ import (
 
 func main() {
 
-	dsn := flag.String("dsn", "", "A valid SQLite DSN")
+	db_uri := flag.String("database-uri", "", "A valid SQLite DSN")
 	query_str := flag.String("query", "", "A valid SQL query")
 
 	flag.Parse()
 
 	ctx := context.Background()
 
-	db, err := database.NewDB(ctx, *dsn)
+	db, err := sqlite.NewDatabase(ctx, *db_uri)
 
 	if err != nil {
 		log.Fatalf("Failed to create new database, %v", err)
 	}
 
-	conn, err := db.Conn()
+	conn, err := db.Conn(ctx)
 
 	if err != nil {
 		log.Fatalf("Failed to get database connection, %v", err)
