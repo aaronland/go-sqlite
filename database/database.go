@@ -4,10 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	_ "github.com/mattn/go-sqlite3"
-	_ "log"
 	"strings"
 	"sync"
+	_ "modernc.org/sqlite"
 )
 
 type SQLiteDatabase struct {
@@ -17,7 +16,7 @@ type SQLiteDatabase struct {
 }
 
 func NewDB(ctx context.Context, dsn string) (*SQLiteDatabase, error) {
-	return NewDBWithDriver(ctx, "sqlite3", dsn)
+	return NewDBWithDriver(ctx, "sqlite", dsn)
 }
 
 func NewDBWithDriver(ctx context.Context, driver string, dsn string) (*SQLiteDatabase, error) {
